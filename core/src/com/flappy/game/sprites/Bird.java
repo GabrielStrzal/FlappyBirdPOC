@@ -1,6 +1,8 @@
 package com.flappy.game.sprites;
 
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
@@ -16,6 +18,7 @@ public class Bird {
     private Texture texture;
     private Rectangle bounds;
     private Animations birdAnimation;
+    private Sound flap;
 
     public Bird(int x, int y){
         position = new Vector3(x,y,0);
@@ -23,6 +26,7 @@ public class Bird {
         texture = new Texture("birdanimation.png");
         birdAnimation = new Animations(new TextureRegion(texture), 3, 0.5f);
         bounds = new Rectangle(x, y, texture.getWidth()/3, texture.getHeight());
+        flap = Gdx.audio.newSound(Gdx.files.internal("sfx_wing.ogg"));
     }
     public void update(float dt){
         birdAnimation.update(dt);
@@ -48,12 +52,14 @@ public class Bird {
     }
     public void jump(){
         velocity.y = BIRD_JUMP;
+        flap.play(0.3f);
     }
     public Rectangle getBounds(){
         return bounds;
     }
     public void dispose(){
         texture.dispose();
+        flap.dispose();
     }
 }
 
