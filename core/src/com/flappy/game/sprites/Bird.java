@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector3;
 public class Bird {
     private static final int GRAVITY = -15;
     private static final int MOVEMENT = 100;
+    public static final int BIRD_JUMP = 200;
     private Vector3 position;
     private Vector3 velocity;
     private Texture bird;
@@ -41,7 +42,7 @@ public class Bird {
         return bird;
     }
     public void jump(){
-        velocity.y = 250;
+        velocity.y = BIRD_JUMP;
     }
     public Rectangle getBounds(){
         return bounds;
